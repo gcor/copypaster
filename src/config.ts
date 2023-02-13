@@ -1,11 +1,17 @@
-export enum Lang {
+export enum Language {
   RU = "ru",
-  UK = "uk",
+  EN = "en",
+}
+
+export enum Locale {
+  RU = "ru",
+  US = "us",
+  GB = "gb",
 }
 
 export enum Spacing {
-  S = "s",
-  L = "l",
+  S = " ",
+  L = " ",
 }
 
 export type ISymbol = string | Spacing;
@@ -15,181 +21,240 @@ export interface IItem {
   example: string;
 }
 
-export interface IRow {
-  locale: Lang;
+export type IRow = {
   items: IItem[];
-}
+};
 
 export interface ISection {
   title: string;
-  rows: IRow[];
+  locales: {
+    [key in Locale]: IRow;
+  };
 }
 
 export const sections: ISection[] = [
   {
     title: "Кавычки",
-    rows: [
-      {
-        locale: Lang.RU,
+    locales: {
+      [Locale.RU]: {
         items: [
-          {
-            symbols: ["«", Spacing.L, "»"],
-            example: "«Слово 1»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 2»",
-          },
-          {
-            symbols: ["«", "»", "«", "»"],
-            example: "«Слово 3»",
-          },
+          { symbols: ["«", "»"], example: "«Слово»" },
+          { symbols: ["„", "“"], example: "«Слово“" },
+          { symbols: ["«", "„", "“", "»"], example: "ООО «НПЦ „ОК“»" },
         ],
       },
-      {
-        locale: Lang.UK,
+      [Locale.US]: {
         items: [
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 1»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 2»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 3»",
-          },
+          { symbols: ["“", "”"], example: "“Word”" },
+          { symbols: ["‘", "’"], example: "‘Word’" },
+          { symbols: ["“", "‘", "’", "”"], example: "LTC “RPC ‘Norm’”" },
         ],
       },
-    ],
+      [Locale.GB]: {
+        items: [
+          { symbols: ["‘", "’"], example: "‘Word’" },
+          { symbols: ["“", "”"], example: "“Word”" },
+          { symbols: ["‘", "“", "”", "’"], example: "LTC ‘RPC “Norm“’" },
+        ],
+      },
+    },
   },
   {
     title: "Валюта",
-    rows: [
-      {
-        locale: Lang.RU,
-        items: [
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 1»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 2»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 3»",
-          },
-        ],
+    locales: {
+      [Locale.RU]: {
+        items: [{ symbols: ["X", Spacing.L, "₽"], example: "100 ₽" }],
       },
-      {
-        locale: Lang.UK,
-        items: [
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 1»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 2»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 3»",
-          },
-        ],
+      [Locale.US]: {
+        items: [{ symbols: ["$", "X"], example: "$100" }],
       },
-    ],
+      [Locale.GB]: {
+        items: [{ symbols: ["£", "X"], example: "£100" }],
+      },
+    },
   },
   {
-    title: "Валюта 2",
-    rows: [
-      {
-        locale: Lang.UK,
+    title: "Знак номера",
+    locales: {
+      [Locale.RU]: {
+        items: [
+          { symbols: ["№", Spacing.L, "X"], example: "№ 007" },
+          { symbols: ["№", Spacing.S, "X"], example: "№ 007" },
+        ],
+      },
+      [Locale.US]: {
+        items: [{ symbols: ["#", "X"], example: "#007" }],
+      },
+      [Locale.GB]: {
+        items: [
+          { symbols: ["No.", Spacing.L, "X"], example: "No. 007" },
+          { symbols: ["#", "X"], example: "#007" },
+        ],
+      },
+    },
+  },
+  {
+    title: "Многоточие",
+    locales: {
+      [Locale.RU]: {
+        items: [{ symbols: ["…"], example: "Подожди-ка…" }],
+      },
+      [Locale.US]: {
         items: [
           {
-            symbols: ["«", "»"],
-            example: "«Слово 1»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 2»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 3»",
+            symbols: [".", Spacing.L, ".", Spacing.L, "."],
+            example: "Wait a sec. . .",
           },
         ],
       },
-    ],
-  },
-  {
-    title: "Валюта 3",
-    rows: [
-      {
-        locale: Lang.UK,
-        items: [
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 1»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 2»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 3»",
-          },
-        ],
+      [Locale.GB]: {
+        items: [{ symbols: ["…"], example: "Wait a min…" }],
       },
-    ],
+    },
   },
   {
-    title: "Валюта 4",
-    rows: [
-      {
-        locale: Lang.UK,
-        items: [
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 1»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 2»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 3»",
-          },
-        ],
+    title: "Время",
+    locales: {
+      [Locale.RU]: {
+        items: [{ symbols: ["hh", ":", "mm"], example: "21:00  21:00" }],
       },
-    ],
-  },
-  {
-    title: "Валюта 5",
-    rows: [
-      {
-        locale: Lang.UK,
+      [Locale.US]: {
         items: [
           {
-            symbols: ["«", "»"],
-            example: "«Слово 1»",
+            symbols: ["hh", ".", "mm", Spacing.L, "A.", Spacing.S, "M."],
+            example: "0.06 AM",
           },
           {
             symbols: ["hh", ".", "mm", Spacing.L, "A.", Spacing.S, "M."],
-            example: "«Слово 2»",
-          },
-          {
-            symbols: ["«", "»"],
-            example: "«Слово 3»",
+            example: "0.06 A. M.",
           },
         ],
       },
-    ],
+      [Locale.GB]: {
+        items: [
+          {
+            symbols: ["hh", ".", "mm", Spacing.L, "am"],
+            example: "09.06 am",
+          },
+        ],
+      },
+    },
+  },
+  {
+    title: "Интервал",
+    locales: {
+      [Locale.RU]: {
+        items: [
+          { symbols: ["X", "—", "X"], example: "100—200" },
+          { symbols: ["X", "–", "X"], example: "9:00–18:00" },
+          { symbols: ["X", "…", "X"], example: "+7…+15" },
+          {
+            symbols: [
+              "X",
+              Spacing.S,
+              "X",
+              Spacing.L,
+              "—",
+              Spacing.L,
+              "X",
+              Spacing.S,
+              "X",
+            ],
+            example: "9 °F — 15 °F  10 сен — 5 отк",
+          },
+        ],
+      },
+      [Locale.US]: {
+        items: [{ symbols: ["X", "–", "X"], example: "100–200" }],
+      },
+      [Locale.GB]: {
+        items: [{ symbols: ["X", "–", "X"], example: "100–200" }],
+      },
+    },
+  },
+  {
+    title: "Дроби",
+    locales: {
+      [Locale.RU]: {
+        items: [{ symbols: [","], example: "3,14" }],
+      },
+      [Locale.US]: {
+        items: [{ symbols: ["."], example: "3.14" }],
+      },
+      [Locale.GB]: {
+        items: [{ symbols: ["."], example: "3.14" }],
+      },
+    },
+  },
+  {
+    title: "Дата",
+    locales: {
+      [Locale.RU]: {
+        items: [
+          {
+            symbols: ["дд", Spacing.L, "ммм", Spacing.L, "гггг"],
+            example: "25 сен 2022",
+          },
+          {
+            symbols: ["дд", Spacing.L, "месяц", Spacing.L, "гггг"],
+            example: "25 сентября 2022",
+          },
+        ],
+      },
+      [Locale.US]: {
+        items: [
+          {
+            symbols: ["mmm", Spacing.L, "dd"],
+            example: "Sep 6",
+          },
+          {
+            symbols: ["month", Spacing.L, "dd"],
+            example: "September 6",
+          },
+          {
+            symbols: [
+              "weekday",
+              ",",
+              Spacing.L,
+              "month",
+              ",",
+              Spacing.L,
+              "dd",
+              ",",
+              Spacing.L,
+              "year",
+            ],
+            example: "Monday, September 6, 2019",
+          },
+        ],
+      },
+      [Locale.GB]: {
+        items: [
+          {
+            symbols: ["mmm", Spacing.L, "dd"],
+            example: "Sep 6",
+          },
+          {
+            symbols: ["month", Spacing.L, "dd"],
+            example: "September 6",
+          },
+          {
+            symbols: [
+              "weekday",
+              ",",
+              Spacing.L,
+              "month",
+              ",",
+              Spacing.L,
+              "dd",
+              ",",
+              Spacing.L,
+              "year",
+            ],
+            example: "Monday, September 6, 2019",
+          },
+        ],
+      },
+    },
   },
 ];

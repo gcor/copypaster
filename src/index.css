@@ -1,26 +1,33 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+@font-face {
+  font-family: "Martian Mono";
+  src: url("MartianMonoVF.woff2") format("woff2-variations");
+}
+
+body {
+  margin: 0;
+  font-size: 16px;
+  font-family: "Martian Mono", monospace, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color: rgba(255, 255, 255, 1);
-  background-color: #000;
-
+  background-color: #1a1a1a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  font-feature-settings: "tnum" on, "lnum" on;
+
+  --bg-color: #1a1a1a;
+  --section-color: #282828;
+  --symbol-size: 46px;
 }
 
 * {
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-size: 14px;
 }
 
 ul {
@@ -29,7 +36,9 @@ ul {
   list-style-type: none;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-size: inherit;
   font-weight: inherit;
   padding: 0;
@@ -48,4 +57,8 @@ button {
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
+}
+
+button:focus-visible {
+  outline: 2px solid white;
 }
