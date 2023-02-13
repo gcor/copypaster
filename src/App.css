@@ -5,7 +5,7 @@
   margin: 2px;
 }
 .sections__item {
-  background: #282828;
+  background-color: #282828;
   border-radius: 10px;
   flex: auto;
 }
@@ -68,7 +68,7 @@
   min-width: 30px;
   padding-left: 5px;
   padding-right: 5px;
-  background: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.08);
   transition: all 0.2s ease-in-out;
   border-radius: 4px;
   position: relative;
@@ -99,30 +99,25 @@
 .sybmol_space_l {
   min-width: 18px;
 }
-.sybmol:active {
-  background: #282828;
-}
 
-button.sybmol:not(:disabled):hover {
-  background: #555;
+button.sybmol:not(:active):hover {
+  background-color: #555;
 }
 
 .example {
   font-size: 16px;
   color: rgba(255, 255, 255, 0.36);
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Graphik LC', 'Graphik', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  transition: all 0.2s ease-in-out;
+  
 }
 
-button.example:not(:disabled):hover {
-  opacity: 1;
-}
-
-.example_copied {
-  opacity: 0.2;
+button.example:not(:active):hover {
+  color: rgba(255, 255, 255, 1);
 }
 
 [data-tooltip] {
-    position: relative;
+  position: relative;
 }
 [data-tooltip]:hover:after {
   content: attr(data-tooltip);
@@ -138,7 +133,7 @@ button.example:not(:disabled):hover {
   align-items: flex-start;
   padding: 5px;
 
-  background: #393939;
+  background-color: #393939;
   border-radius: 5px;
 
   left: 50%;

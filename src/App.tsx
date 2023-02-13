@@ -18,7 +18,6 @@ function Symbol({ symbol }: { symbol: ISymbol }) {
       onClick={onCopy}
       disabled={isCopied}
       className={classnames("sybmol", {
-        sybmol_copied: isCopied,
         sybmol_space: symbol === Spacing.S || symbol === Spacing.L,
         sybmol_space_s: symbol === Spacing.S,
         sybmol_space_l: symbol === Spacing.L,
