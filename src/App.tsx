@@ -1,8 +1,8 @@
+import { useMemo } from "react";
 import classnames from "classnames";
 import { IRow, ISection, ISymbol, sections, Spacing } from "./config";
 import { useCopyHref } from "./useCopy";
 import "./App.css";
-import { useMemo } from "react";
 
 function Symbol({ symbol }: { symbol: ISymbol }) {
   const { isCopied, onCopy } = useCopyHref(symbol);
@@ -16,7 +16,6 @@ function Symbol({ symbol }: { symbol: ISymbol }) {
   return (
     <button
       onClick={onCopy}
-      disabled={isCopied}
       className={classnames("sybmol", {
         sybmol_space: symbol === Spacing.S || symbol === Spacing.L,
         sybmol_space_s: symbol === Spacing.S,
@@ -35,7 +34,6 @@ function Example({ example }: { example: string }) {
   return (
     <button
       onClick={onCopy}
-      disabled={isCopied}
       className={classnames("example", {
         example_copied: isCopied,
       })}
